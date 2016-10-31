@@ -18,6 +18,8 @@ export default class ispy extends Component {
     return (
     	<View style={styles.mainContainer}>
     		<View style={styles.sidebar}>
+          <View style={styles.sidebar_element}/>
+          <View style={styles.fillerLine}/>
     			<MyComponent/>
     		</View>
     		<View style={styles.content}>
@@ -36,7 +38,7 @@ class MyComponent extends Component {
 		super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+			dataSource: ds.cloneWithRows(['f1', 'f2', '+']),
 		};
 	}
 
@@ -44,7 +46,11 @@ class MyComponent extends Component {
 		return (
 			<ListView
 				dataSource={this.state.dataSource}
-				renderRow={(rowData) => <Text>{rowData}</Text>}
+				renderRow={(rowData) =>
+					<View style={styles.sidebar_element}>
+						<Text style={styles.sidebar_elementText}>{rowData}</Text>
+					</View>
+				}
 			/>
 		);
 	}
@@ -61,6 +67,24 @@ const styles = StyleSheet.create({
   	content: {
   		flex: 1
   	},
+  	sidebar_element: {
+  		width: 38,
+  		height: 38,
+  		borderWidth: 2,
+  		borderRadius: 5,
+  		borderColor: "#000000",
+      marginTop: 2
+  	},
+  	sidebar_elementText: {
+  		marginLeft: 2
+  	},
+    fillerLine: {
+      height: 1,
+      borderWidth: 1,
+      borderColor: "#000000",
+      marginTop: 2,
+      marginBottom: 2
+    }
 });
 
 AppRegistry.registerComponent('ispy', () => ispy);
