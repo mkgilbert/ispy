@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-class cs399_proj1_calculator extends Component {
+export default class ispy extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('cs399_proj1_calculator', () => cs399_proj1_calculator);
+AppRegistry.registerComponent('ispy', () => ispy);
