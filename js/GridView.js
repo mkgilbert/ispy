@@ -9,23 +9,37 @@ import {
 } from 'react-native';
 
 export class GridView extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        var data = Array.apply(null, {length:20}).map(Number.call, Number);
         this.state = {
-            dataSource: ds.cloneWithRows(data),
+            dataSource: ds.cloneWithRows(props.image),
         };
     }
 
+    renderRow(rowData, sectionID, rowID) {
+        var elements = rowData.map(
+            (data, i) => {
+                return(
+                    <View key={i} style={styles.item}>
+                        <Text>{data}</Text>
+                    </View>
+                );
+            }
+        );
+        return (
+            <View style={styles.row}>
+                {elements}
+            </View>
+        );
+    }
     render() {
         return(
             <ListView
                 contentContainerStyle={styles.list}
                 dataSource={this.state.dataSource}
-                renderRow={(rowData) =>
-                    <Text style={styles.item}>{rowData}</Text>
-                }
+                initialListSize={20}
+                renderRow={this.renderRow.bind(this)}
             />
         );
     }
@@ -33,13 +47,17 @@ export class GridView extends Component {
 
 var styles = StyleSheet.create({
     list: {
-        flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap:'wrap'
+    },
+    row: {
+        flexDirection:'row',
+        flexWrap:'wrap',
     },
     item: {
         backgroundColor: 'red',
-        margin: 3,
-        width: 100
+        width: 50,
+        height: 50,
+        margin: 3
     }
 });
 
