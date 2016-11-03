@@ -14,12 +14,13 @@ import {
   View
 } from 'react-native';
 import GridView from './js/GridView';
+import Base from './js/Base';
 
 export default class ispy extends Component {
   render() {
     return (
         <View style={styles.mainContainer}>
-            <GridView />
+            <Base />
         </View>
     );
   }
