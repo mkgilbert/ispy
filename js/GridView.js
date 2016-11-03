@@ -12,23 +12,51 @@ export class GridView extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        // Use AsyncStorage + Json Library to store Camera Stats and load them when we need them
+        var {width, height} = Dimensions.get('window');
+        var margins = ((this.props.itemMargins!=null) ? this.props.itemMargins : 0);
+        var styles = StyleSheet.create({
+            list: {
+                flexWrap:'wrap'
+            },
+            row: {
+                flexDirection:'row',
+                flexWrap:'wrap',
+            },
+            item: {
+                backgroundColor: 'red',
+                margin: margins
+            }
+        });
         this.state = {
-            dataSource: ds.cloneWithRows(props.image),
+            screenWidth: width,
+            screenHeight: height,
+            itemMargins: margins,
+            itemsPerRow: this.props.itemsPerRow,
+            dataSource: ds.cloneWithRows(this.props.data),
+            styles: styles
         };
+    }
+
+    calculateSize() {
+        //Shift is to account for Margins on both horizontal sides of each Item
+        var shift = (this.state.itemMargins*2)*this.state.itemsPerRow;
+        var size = (this.state.screenWidth-shift) / this.state.itemsPerRow;
+        return ({width:size, height:size});
     }
 
     renderRow(rowData, sectionID, rowID) {
         var elements = rowData.map(
             (data, i) => {
                 return(
-                    <View key={i} style={styles.item}>
-                        <Text>{data}</Text>
+                    <View key={i} style={[this.state.styles.item, this.calculateSize()]}>
+                        {data.render()}
                     </View>
                 );
             }
         );
         return (
-            <View style={styles.row}>
+            <View style={this.state.styles.row}>
                 {elements}
             </View>
         );
@@ -36,7 +64,7 @@ export class GridView extends Component {
     render() {
         return(
             <ListView
-                contentContainerStyle={styles.list}
+                contentContainerStyle={this.state.styles.list}
                 dataSource={this.state.dataSource}
                 initialListSize={20}
                 renderRow={this.renderRow.bind(this)}
@@ -44,21 +72,5 @@ export class GridView extends Component {
         );
     }
 }
-
-var styles = StyleSheet.create({
-    list: {
-        flexWrap:'wrap'
-    },
-    row: {
-        flexDirection:'row',
-        flexWrap:'wrap',
-    },
-    item: {
-        backgroundColor: 'red',
-        width: 50,
-        height: 50,
-        margin: 3
-    }
-});
 
 export default GridView
