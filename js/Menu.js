@@ -7,11 +7,29 @@ import {
     Text,
     View,
     ScrollView,
-    BackAndroid
+    BackAndroid,
+    TouchableHighlight
 } from 'react-native';
 import Hr from 'react-native-hr';
 
 const window = Dimensions.get('window');
+
+class Button extends Component {
+    handlePress(e) {
+        if (this.props.onPress) {
+            this.props.onPress(e);
+        }
+    }
+
+    render() {
+        return (
+            <TouchableNativeFeedback
+                onPress={this.handlePress.bind(this)}>
+                <Text>{this.props.children}</Text>
+            </TouchableNativeFeedback>
+        );
+    }
+}
 
 class Menu extends Component {
     render() {
@@ -19,17 +37,17 @@ class Menu extends Component {
             <ScrollView scrollsToTop={false} style={styles.menu}>
                 <Text style={styles.menuTitle}>Menu</Text>
                 <Hr lineColor='#FFFFFF' />
-                <Text
-                    onPress={() => this.props.onItemSelected('About')}
-                    style={styles.item}>
-                    About
-                </Text>
+                <TouchableHighlight onPress={() => this.props.onItemSelected('Cameras')}
+                    underlayColor='grey'
+                    style={styles.menuButton}>
+                    <Text style={styles.item}>Cameras</Text>
+                </TouchableHighlight>
 
-                <Text
-                    onPress={() => this.props.onItemSelected('Contacts')}
-                    style={styles.item}>
-                    Contacts
-                </Text>
+                <TouchableHighlight onPress={() => this.props.onItemSelected('Events')}
+                    underlayColor='grey'
+                    style={styles.menuButton}>
+                    <Text style={styles.item}>Events</Text>
+                </TouchableHighlight>
             </ScrollView>
         );
     }
@@ -47,6 +65,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#424242',
         paddingTop: 20,
     },
+    menuButton: {
+        flex: 1,
+        height: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     avatar: {
         width: 48,
         height: 48,
@@ -63,9 +87,7 @@ const styles = StyleSheet.create({
     item: {
         fontSize: 18,
         fontWeight: '300',
-        paddingTop: 10,
         paddingLeft: 10,
-        alignItems: 'center',
         color: '#FFFFFF',
     },
 });

@@ -8,29 +8,13 @@ import {
     ScrollView,
     BackAndroid,
     Image,
-    TouchableOpacity
+    TouchableHighlight
 } from 'react-native';
 import Menu from './Menu';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const SideMenu = require('react-native-side-menu');
 
-class Button extends Component {
-    handlePress(e) {
-        if (this.props.onPress) {
-            this.props.onPress(e);
-        }
-    }
-
-    render() {
-        return (
-            <TouchableOpacity
-                onPress={this.handlePress.bind(this)}>
-                <Text>{this.props.children}</Text>
-            </TouchableOpacity>
-        );
-    }
-}
 
 class Base extends Component {
     state = {
@@ -57,7 +41,6 @@ class Base extends Component {
 
     render() {
         const menu = <Menu onItemSelected={this.onMenuItemSelected} />;
-
         return (
             <SideMenu
                 menu={menu}
@@ -67,14 +50,15 @@ class Base extends Component {
                     <Icon.ToolbarAndroid
                         style={styles.toolbar}
                         title='iSpy'
+                        titleColor='#FFFFFF'
                         navIconName="navicon"
                         iconColor="#FFFFFF"
-                        onIconClicked={() => this.toggle()}
-                    />
-                    <Text style={styles.instructions}>
+                        onIconClicked={() => this.toggle()}>
+                    </Icon.ToolbarAndroid>
+                    <Text>
                         Welcome to React Native!
                     </Text>
-                    <Text style={styles.instructions}>
+                    <Text>
                         Current selected menu item is: {this.state.selectedItem}
                     </Text>
                 </View>
@@ -85,6 +69,10 @@ class Base extends Component {
 }
 
 const styles = StyleSheet.create({
+    title: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     toolbar: {
         height: 40,
         backgroundColor: '#424242',
@@ -94,16 +82,11 @@ const styles = StyleSheet.create({
         margin: 20,
         fontSize: 30,
     },
-
     button: {
         position: 'absolute',
         top: 20,
         padding: 10,
-    },
-    caption: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignItems: 'center',
+        backgroundColor: 'blue',
     },
     container: {
         flex: 1,
@@ -111,16 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         backgroundColor: '#F5FCFF',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
+
 });
 
 export default Base;
