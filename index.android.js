@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import GridView from './js/GridView';
 import Camera from './js/Camera'
+import Base from './js/Base';
 
 export default class ispy extends Component {
   render() {
@@ -23,7 +24,7 @@ export default class ispy extends Component {
       ];
     return (
         <View style={styles.mainContainer}>
-            <GridView itemsPerRow={2} data={stuff}/>
+            <Base />
         </View>
     );
   }
