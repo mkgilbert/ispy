@@ -66,8 +66,9 @@ class Base extends Component {
                 <View style={styles.container}>
                     <Icon.ToolbarAndroid
                         style={styles.toolbar}
-                        title="iSpy"
+                        title='iSpy'
                         navIconName="navicon"
+                        iconColor="#FFFFFF"
                         onIconClicked={() => this.toggle()}
                     />
                     <Text style={styles.instructions}>

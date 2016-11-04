@@ -9,6 +9,7 @@ import {
     ScrollView,
     BackAndroid
 } from 'react-native';
+import Hr from 'react-native-hr';
 
 const window = Dimensions.get('window');
 
@@ -16,10 +17,8 @@ class Menu extends Component {
     render() {
         return (
             <ScrollView scrollsToTop={false} style={styles.menu}>
-                <View style={styles.avatarContainer}>
-                    <Text>Your name</Text>
-                </View>
-
+                <Text style={styles.menuTitle}>Menu</Text>
+                <Hr lineColor='#FFFFFF' />
                 <Text
                     onPress={() => this.props.onItemSelected('About')}
                     style={styles.item}>
@@ -45,12 +44,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: window.width,
         height: window.height,
-        backgroundColor: 'gray',
-        padding: 20,
-    },
-    avatarContainer: {
-        marginBottom: 20,
-        marginTop: 20,
+        backgroundColor: '#424242',
+        paddingTop: 20,
     },
     avatar: {
         width: 48,
@@ -58,15 +53,20 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         flex: 1,
     },
-    name: {
-        position: 'absolute',
-        left: 70,
-        top: 20,
+    menuTitle: {
+        fontSize: 20,
+        fontWeight: '400',
+        color: '#FFFFFF',
+        marginBottom: 20,
+        paddingLeft: 10,
     },
     item: {
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: '300',
-        paddingTop: 5,
+        paddingTop: 10,
+        paddingLeft: 10,
+        alignItems: 'center',
+        color: '#FFFFFF',
     },
 });
 
