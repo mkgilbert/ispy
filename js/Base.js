@@ -10,6 +10,8 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
+import GridView from './GridView';
+import Camera from './Camera'
 import Menu from './Menu';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -40,6 +42,10 @@ class Base extends Component {
     };
 
     render() {
+        var stuff = [
+            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png'})],
+            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png'})],
+        ];
         const menu = <Menu onItemSelected={this.onMenuItemSelected} />;
         return (
             <SideMenu
@@ -61,6 +67,7 @@ class Base extends Component {
                     <Text>
                         Current selected menu item is: {this.state.selectedItem}
                     </Text>
+                    <GridView itemMargins={3} itemsPerRow={2} data={stuff}/>
                 </View>
 
             </SideMenu>
