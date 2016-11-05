@@ -10,18 +10,19 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
+const SideMenu = require('react-native-side-menu');
+
 import GridView from './GridView';
 import Camera from './Camera'
 import Menu from './Menu';
-import Icon from 'react-native-vector-icons/FontAwesome'
-
-const SideMenu = require('react-native-side-menu');
+import EventView from './EventView';
 
 
 class Base extends Component {
     state = {
         isOpen: false,
-        selectedItem: 'About',
+        selectedItem: 'iSpy',
     };
 
     toggle() {
@@ -55,19 +56,16 @@ class Base extends Component {
                 <View style={styles.container}>
                     <Icon.ToolbarAndroid
                         style={styles.toolbar}
-                        title='iSpy'
+                        title={this.state.selectedItem}
                         titleColor='#FFFFFF'
                         navIconName="navicon"
                         iconColor="#FFFFFF"
                         onIconClicked={() => this.toggle()}>
                     </Icon.ToolbarAndroid>
-                    <Text>
-                        Welcome to React Native!
-                    </Text>
-                    <Text>
-                        Current selected menu item is: {this.state.selectedItem}
-                    </Text>
-                    <GridView itemMargins={3} itemsPerRow={2} data={stuff}/>
+                    { this.state.selectedItem == 'Cameras' ?
+                        <GridView itemMargins={3} itemsPerRow={2} data={stuff}/>
+                        : <EventView />
+                    }
                 </View>
 
             </SideMenu>

@@ -32,8 +32,11 @@ export default class ispy extends Component {
 
 var styles = StyleSheet.create({
     mainContainer: {
-        flex: 1
-    }
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+    },
+
 });
 
 AppRegistry.registerComponent('ispy', () => ispy);
