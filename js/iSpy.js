@@ -19,6 +19,7 @@ import Camera from './Camera'
 import Menu from './Menu';
 import CameraView from './CameraView';
 import EventView from './EventView';
+import CameraSettings from './CameraSettings';
 
 
 class iSpy extends Component {
@@ -77,6 +78,8 @@ class iSpy extends Component {
     }
 
     renderScene(route, navigator) {
+        var navIcon = 'navicon';
+        var showBars = true;
         var stuff = [
             [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 1})],
             [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 2})],
@@ -95,6 +98,11 @@ class iSpy extends Component {
             case 'CameraView':
                 componentToRender = <CameraView navigator={navigator} route={route} />;
                 break;
+            case 'CameraSettings':
+                componentToRender = <CameraSettings navigator={navigator} route={route} />;
+                navIcon = 'arrow-left';
+                showBars = false;
+                break;
             default:
                 break;
         }
@@ -109,9 +117,9 @@ class iSpy extends Component {
                         style={styles.toolbar}
                         title={route.passProps.name}
                         titleColor='#FFFFFF'
-                        navIconName="navicon"
+                        navIconName={navIcon}
                         iconColor="#FFFFFF"
-                        onIconClicked={() => this.toggle()}>
+                        onIconClicked={() => {showBars === true ? this.toggle() : navigator.pop()}}>
                     </Icon.ToolbarAndroid>
                     {componentToRender}
                 </View>

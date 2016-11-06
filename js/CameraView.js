@@ -21,6 +21,16 @@ class CameraView extends Component {
         super(props);
     }
 
+    buildRoute(screenName, name) {
+        let route = {
+            id: screenName,
+            passProps: {
+                name: name,
+                camData: this.props.route.passProps.camData
+            }
+        };
+        return route;
+    }
     render() {
         let camData = this.props.route.passProps.camData;
         return (
@@ -28,19 +38,25 @@ class CameraView extends Component {
                 <Image style={styles.camera} source={{uri: camData.deets}} />
                 <Icon name="camera" size={25} style={{padding: 5, alignSelf: 'flex-end'}} />
                 <View style={styles.buttonContainer}>
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableHighlight
+                        style={styles.button}
+                        onPress={() => this.props.navigator.push(this.buildRoute('CameraSettings', 'Settings'))}>
                         <View style={styles.buttonView}>
                             <Icon name="gear" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Settings</Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableHighlight
+                        style={styles.button}
+                        onPress={() => this.props.navigator.push(this.buildRoute('CameraAlerts', 'Alerts'))}>
                         <View style={styles.buttonView}>
                             <Icon name="bell" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Alerts</Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight style={styles.button}>
+                    <TouchableHighlight
+                        style={styles.button}
+                        onPress={() => this.props.navigator.push(this.buildRoute('CameraEvents', 'Events'))}>
                         <View style={styles.buttonView}>
                             <Icon name="calendar-o" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Events</Text>
