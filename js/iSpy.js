@@ -20,6 +20,8 @@ import Menu from './Menu';
 import CameraView from './CameraView';
 import EventView from './EventView';
 import CameraSettings from './CameraSettings';
+import CameraEvents from './CameraEvents';
+import CameraAlerts from './CameraAlerts';
 
 
 class iSpy extends Component {
@@ -57,16 +59,6 @@ class iSpy extends Component {
         });
     };
 
-    onScreenPush(name, navigator) {
-        navigator.push({
-            is: name
-        });
-    }
-
-    onScreenPop(navigator) {
-        navigator.pop();
-    }
-
     /* Render the app */
     render() {
         return (
@@ -100,6 +92,16 @@ class iSpy extends Component {
                 break;
             case 'CameraSettings':
                 componentToRender = <CameraSettings navigator={navigator} route={route} />;
+                navIcon = 'arrow-left';
+                showBars = false;
+                break;
+            case 'CameraAlerts':
+                componentToRender = <CameraAlerts navigator={navigator} route={route} />;
+                navIcon = 'arrow-left';
+                showBars = false;
+                break;
+            case 'CameraEvents':
+                componentToRender = <CameraEvents navigator={navigator} route={route} />;
                 navIcon = 'arrow-left';
                 showBars = false;
                 break;

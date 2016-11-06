@@ -13,19 +13,47 @@ import {
     Image
 } from 'react-native';
 
-const window = Dimensions.get('window');
+var window = Dimensions.get('window');
 
 class CameraSettings extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            camName: "",
+            camURL: this.props.route.passProps.camData.deets,
+            camPort: ""
+        };
+    }
+
+    componentDidMount() {
+        window = Dimensions.get('window');
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <Text>Camera Name</Text>
-                    <TextInput />
+                    <Text style={styles.text}>Name</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={(text) => this.setState({camName: text})}
+                        value={this.state.camName}
+                    />
+                    <Text style={styles.text}>URL / IP Address</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        keyboardType='url'
+                        onChangeText={(text) => this.setState({camURL: text})}
+                        value={this.state.camURL}
+                    />
+                    <Text style={styles.text}>Port</Text>
+                    <TextInput
+                        style={styles.textInput}
+                        keyboardType='numeric'
+                        onChangeText={(text) => this.setState({camPort: text})}
+                        value={this.state.camPort}
+                    />
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
@@ -43,11 +71,20 @@ class CameraSettings extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: window.width,
     },
     inputContainer: {
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        padding: 5
     },
-    inputText: {
+    textInput: {
+        height: 40,
+        width: window.width - 10,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 10,
+    },
+    text: {
         fontWeight: 'bold',
         fontSize: 14,
     },
