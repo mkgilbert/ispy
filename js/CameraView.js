@@ -26,15 +26,26 @@ class CameraView extends Component {
         return (
             <View style={styles.container}>
                 <Image style={styles.camera} source={{uri: camData.deets}} />
-                <TouchableHighlight style={styles.button}>
-                    <Text>Settings</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
-                    <Text>Alerts</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}>
-                    <Text>Events</Text>
-                </TouchableHighlight>
+                <View style={styles.buttonContainer}>
+                    <TouchableHighlight style={styles.button}>
+                        <View style={styles.buttonView}>
+                            <Icon name="gear" size={40} color="white"/>
+                            <Text style={styles.buttonViewContent}>Settings</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.button}>
+                        <View style={styles.buttonView}>
+                            <Icon name="bell" size={40} color="white"/>
+                            <Text style={styles.buttonViewContent}>Alerts</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.button}>
+                        <View style={styles.buttonView}>
+                            <Icon name="calendar-o" size={40} color="white"/>
+                            <Text style={styles.buttonViewContent}>Events</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
             </View>
         );
     }
@@ -49,15 +60,26 @@ const styles = StyleSheet.create({
         height: window.width,
         backgroundColor: 'grey',
     },
-    button: {
+    buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         flexWrap: 'nowrap',
-        width: 70,
-        height: 70,
+        padding: 15,
+    },
+    button: {
+        width: 75,
+        height: 75,
         margin: 15,
-        backgroundColor: 'grey'
+        padding: 5,
+        borderRadius: 10,
+        backgroundColor: '#888888'
+    },
+    buttonView: {
+        alignItems: 'center',
+    },
+    buttonViewContent: {
+        color: 'white',
     }
 });
 
