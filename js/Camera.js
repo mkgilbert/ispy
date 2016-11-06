@@ -9,7 +9,8 @@ import {
     ListView,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight,
 } from 'react-native';
 
 export class Camera extends Component {
@@ -22,7 +23,7 @@ export class Camera extends Component {
 
     render() {
         return(
-            <Image style={{flex:1}}source={{uri: this.state.deets}}/>
+            <Image style={{flex:1}} source={{uri: this.state.deets}}/>
         );
     }
 }

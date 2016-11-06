@@ -12,38 +12,52 @@ import {
 } from 'react-native';
 import Hr from 'react-native-hr';
 
+import GridView from './GridView';
+import EventView from './EventView';
+
 const window = Dimensions.get('window');
 
-class Button extends Component {
-    handlePress(e) {
-        if (this.props.onPress) {
-            this.props.onPress(e);
-        }
-    }
-
-    render() {
-        return (
-            <TouchableNativeFeedback
-                onPress={this.handlePress.bind(this)}>
-                <Text>{this.props.children}</Text>
-            </TouchableNativeFeedback>
-        );
-    }
-}
-
 class Menu extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    onScreenPush(name, navigator) {
+        navigator.push({
+            id: name,
+        });
+    }
+
+    onScreenPop(navigator) {
+        navigator.pop();
+    }
+
+    closeAndReplace(screenName){
+        this.props.onItemSelected(screenName);
+        this.props.navigator.replace({ id: screenName });
+    };
+
     render() {
         return (
             <ScrollView scrollsToTop={false} style={styles.menu}>
                 <Text style={styles.menuTitle}>Menu</Text>
                 <Hr lineColor='#FFFFFF' />
-                <TouchableHighlight onPress={() => this.props.onItemSelected('Cameras')}
+                <TouchableHighlight onPress={() => this.closeAndReplace('GridView')}
                     underlayColor='grey'
                     style={styles.menuButton}>
                     <Text style={styles.item}>Cameras</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight onPress={() => this.props.onItemSelected('Events')}
+                <TouchableHighlight onPress={() => this.closeAndReplace('EventView')}
                     underlayColor='grey'
                     style={styles.menuButton}>
                     <Text style={styles.item}>Events</Text>

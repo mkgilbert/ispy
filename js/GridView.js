@@ -5,7 +5,8 @@ import {
     ListView,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight
 } from 'react-native';
 
 export class GridView extends Component {
@@ -49,9 +50,9 @@ export class GridView extends Component {
         var elements = rowData.map(
             (data, i) => {
                 return(
-                    <View key={i} style={[this.state.styles.item, this.calculateSize()]}>
+                    <TouchableHighlight key={i} style={[this.state.styles.item, this.calculateSize()]}>
                         {data.render()}
-                    </View>
+                    </TouchableHighlight>
                 );
             }
         );
