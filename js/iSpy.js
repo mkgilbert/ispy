@@ -70,7 +70,7 @@ class iSpy extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{id: 'GridView', name: 'iSpy'}}
+                initialRoute={{id: 'GridView', passProps: {name: 'iSpy'}}}
                 renderScene={this.renderScene.bind(this)}
             />
         );
