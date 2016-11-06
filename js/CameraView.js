@@ -26,6 +26,7 @@ class CameraView extends Component {
         return (
             <View style={styles.container}>
                 <Image style={styles.camera} source={{uri: camData.deets}} />
+                <Icon name="camera" size={25} style={{padding: 5, alignSelf: 'flex-end'}} />
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight style={styles.button}>
                         <View style={styles.buttonView}>
@@ -70,7 +71,9 @@ const styles = StyleSheet.create({
     button: {
         width: 75,
         height: 75,
-        margin: 15,
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 15,
         padding: 5,
         borderRadius: 10,
         backgroundColor: '#888888'
