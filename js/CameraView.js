@@ -9,7 +9,8 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight
+    TouchableHighlight,
+    Image
 } from 'react-native';
 
 const window = Dimensions.get('window');
@@ -21,9 +22,10 @@ class CameraView extends Component {
     }
 
     render() {
+        let camData = this.props.route.passProps.camData;
         return (
             <View style={styles.container}>
-                <Text style={styles.camera}>Camera view</Text>
+                <Image style={styles.camera} source={{uri: camData.deets}} />
                 <TouchableHighlight>
                     <Text>Settings</Text>
                 </TouchableHighlight>
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     camera: {
-        flex: 1,
         width: window.width,
         height: window.width,
         backgroundColor: 'grey',

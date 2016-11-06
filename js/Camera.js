@@ -18,6 +18,7 @@ export class Camera extends Component {
         super(props);
         this.state = {
             deets: this.props.deets,
+            camNumber: this.props.camNumber
         }
     }
 

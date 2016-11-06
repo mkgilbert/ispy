@@ -35,7 +35,7 @@ export class GridView extends Component {
             itemMargins: margins,
             itemsPerRow: this.props.itemsPerRow,
             dataSource: ds.cloneWithRows(this.props.data),
-            styles: styles
+            styles: styles,
         };
     }
 
@@ -50,7 +50,19 @@ export class GridView extends Component {
         var elements = rowData.map(
             (data, i) => {
                 return(
-                    <TouchableHighlight key={i} style={[this.state.styles.item, this.calculateSize()]}>
+                    <TouchableHighlight
+                        key={i}
+                        style={[this.state.styles.item, this.calculateSize()]}
+                        onPress={() => this.props.navigator.replace({
+                            id: 'CameraView',
+                            passProps: {
+                                name: 'Camera' + data.props.camNumber,
+                                camData: {
+                                    id: data.props.camNumber,
+                                    deets: data.props.deets
+                                }
+                            }
+                        })}>
                         {data.render()}
                     </TouchableHighlight>
                 );

@@ -70,7 +70,7 @@ class iSpy extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{id: 'GridView'}}
+                initialRoute={{id: 'GridView', name: 'iSpy'}}
                 renderScene={this.renderScene.bind(this)}
             />
         );
@@ -78,8 +78,8 @@ class iSpy extends Component {
 
     renderScene(route, navigator) {
         var stuff = [
-            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png'})],
-            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png'})],
+            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 1})],
+            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 2})],
         ];
         const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator} />;
         var componentToRender = null;
@@ -93,7 +93,7 @@ class iSpy extends Component {
                 console.log("component to render is EventView");
                 break;
             case 'CameraView':
-                componentToRender = <CameraView navigator={navigator} />;
+                componentToRender = <CameraView navigator={navigator} route={route} />;
                 break;
             default:
                 break;
@@ -107,7 +107,7 @@ class iSpy extends Component {
                 <View style={styles.container}>
                     <Icon.ToolbarAndroid
                         style={styles.toolbar}
-                        title={route.id}
+                        title={route.passProps.name}
                         titleColor='#FFFFFF'
                         navIconName="navicon"
                         iconColor="#FFFFFF"
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     toolbar: {
-        height: 40,
+        height: 56,
         backgroundColor: '#424242',
     },
     centerText: {

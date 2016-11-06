@@ -41,9 +41,9 @@ class Menu extends Component {
         navigator.pop();
     }
 
-    closeAndReplace(screenName){
-        this.props.onItemSelected(screenName);
-        this.props.navigator.replace({ id: screenName });
+    closeAndReplace(id, name){
+        this.props.onItemSelected(id);
+        this.props.navigator.replace({ id: id, passProps: { name: name }});
     };
 
     render() {
@@ -51,13 +51,13 @@ class Menu extends Component {
             <ScrollView scrollsToTop={false} style={styles.menu}>
                 <Text style={styles.menuTitle}>Menu</Text>
                 <Hr lineColor='#FFFFFF' />
-                <TouchableHighlight onPress={() => this.closeAndReplace('GridView')}
+                <TouchableHighlight onPress={() => this.closeAndReplace('GridView', 'Cameras')}
                     underlayColor='grey'
                     style={styles.menuButton}>
                     <Text style={styles.item}>Cameras</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight onPress={() => this.closeAndReplace('EventView')}
+                <TouchableHighlight onPress={() => this.closeAndReplace('EventView', 'Events')}
                     underlayColor='grey'
                     style={styles.menuButton}>
                     <Text style={styles.item}>Events</Text>
