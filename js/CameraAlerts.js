@@ -12,6 +12,7 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 var window = Dimensions.get('window');
 
@@ -27,16 +28,25 @@ class CameraAlerts extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <Text>Camera Name</Text>
-                    <TextInput />
+                <View style={styles.headerContainer}>
+                    <Text style={styles.text}>Name</Text>
+                    <Text style={styles.text}>Enabled</Text>
+                    <Text style={styles.text}>Delete</Text>
+                </View>
+                <View style={styles.list}>
+                    <Text style={{fontSize: 16}}>my alert 1</Text>
+                    <TouchableHighlight>
+                        <Icon name="toggle-on" size={35} />
+                    </TouchableHighlight>
+                    <TouchableHighlight>
+                        <Icon name="trash" size={35} />
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.pop()}
-                        underlayColor="#EF6C00">
-                        <Text style={styles.buttonContent}>Save</Text>
+                        onPress={() => this.props.navigator.pop()}>
+                        <Icon name="plus-circle" size={75} color="orange"/>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -48,22 +58,33 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    headerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 30
+    },
     inputContainer: {
         alignItems: 'flex-start'
     },
-    inputText: {
+    text: {
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 18,
+    },
+    list: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 15
     },
     buttonContainer: {
-        alignItems: 'center'
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        margin: 5
     },
     button: {
-        width: window.width / 2,
-        height: 45,
-        padding: 5,
-        borderRadius: 10,
-        backgroundColor: 'orange'
+        alignSelf: 'flex-end'
     },
     buttonContent: {
         textAlign: 'center',
