@@ -14,11 +14,15 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const window = Dimensions.get('window');
+var window = Dimensions.get('window');
 
 class CameraView extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        window = Dimensions.get('window');
     }
 
     buildRoute(screenName, name) {

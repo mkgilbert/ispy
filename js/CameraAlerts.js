@@ -13,11 +13,15 @@ import {
     Image
 } from 'react-native';
 
-const window = Dimensions.get('window');
+var window = Dimensions.get('window');
 
 class CameraAlerts extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        window = Dimensions.get('window');
     }
 
     render() {

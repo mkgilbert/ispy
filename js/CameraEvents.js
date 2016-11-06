@@ -13,7 +13,7 @@ import {
     Image
 } from 'react-native';
 
-const window = Dimensions.get('window');
+var window = Dimensions.get('window');
 
 class CameraEvents extends Component {
     constructor(props) {
@@ -23,18 +23,7 @@ class CameraEvents extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <Text>Camera Name</Text>
-                    <TextInput />
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={() => this.props.navigator.pop()}
-                        underlayColor="#EF6C00">
-                        <Text style={styles.buttonContent}>Save</Text>
-                    </TouchableHighlight>
-                </View>
+                <Text>Events Page...</Text>
             </View>
         );
     }
