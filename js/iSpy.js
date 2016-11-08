@@ -74,7 +74,7 @@ class iSpy extends Component {
         var showBars = true;
         var stuff = [
             [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 1})],
-            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 2})],
+            [new Camera({deets:'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', camNumber: 2})],
         ];
         const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator} />;
         var componentToRender = null;

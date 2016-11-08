@@ -13,7 +13,6 @@ export class GridView extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        // Use AsyncStorage + Json Library to store Camera Stats and load them when we need them
         var {width, height} = Dimensions.get('window');
         var margins = ((this.props.itemMargins!=null) ? this.props.itemMargins : 0);
         var styles = StyleSheet.create({
@@ -34,6 +33,7 @@ export class GridView extends Component {
             screenHeight: height,
             itemMargins: margins,
             itemsPerRow: this.props.itemsPerRow,
+            //Format Data into items per row as specified, maybe create a prop-toggle for this functionality?
             dataSource: ds.cloneWithRows(this.props.data),
             styles: styles,
         };
