@@ -23,6 +23,10 @@ export class Camera extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState(nextProps);
+    }
+
     render() {
         return(
             <Image style={{flex:1}} source={{uri: this.state.source}}/>

@@ -20,7 +20,18 @@ var window = Dimensions.get('window');
 class CameraView extends Component {
     constructor(props) {
         super(props);
-        this.state = {camIndex:0, camData:{}}
+        this.state = {
+            camIndex:this.props.route.passProps.index,
+            camData:this.props.store.getState().cameras[this.props.route.passProps.index].state
+        }
+
+        this.props.store.subscribe(() => {
+            this.setState({
+                camData:this.props.store.getState().cameras[this.state.camIndex].state
+            });
+            console.log("State Set.")
+            }
+        );
     }
 
     componentDidMount() {
@@ -31,18 +42,17 @@ class CameraView extends Component {
         let route = {
             id: screenName,
             passProps: {
-                camIndex:this.state.index
+                camIndex:this.state.camIndex
             }
         };
         return route;
     }
+
     render() {
-        this.state.index = this.props.route.passProps.index;
-        this.state.camData = this.props.route.passProps.store.getState().cameras[this.state.index].state;
         return (
             <View style={styles.container}>
                 <View style={styles.camera}>
-                    <Camera source={this.state.camData.source} port={this.state.camData.port}/>
+                    <Camera name={this.state.camData.name} source={this.state.camData.source} port={this.state.camData.port}/>
                 </View>
                 <Icon name="camera" size={25} style={{padding: 5, alignSelf: 'flex-end'}} />
                 <View style={styles.buttonContainer}>

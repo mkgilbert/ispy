@@ -43,9 +43,7 @@ class iSpy extends Component {
         store.dispatch(addCamera('Camera3', 'http://wonderfulwoodworkings.com/wp-content/uploads/2016/08/everything-checks-out.png', '42'));
         store.dispatch(removeCamera(1));
         store.dispatch(modifyCameraSettings(0, 'l33t', 'http://www.endlessimpact.com/wp-content/uploads/2014/07/testings.jpg', '01'));
-        unsubscribe();
         store.dispatch(addCamera('Living Room', 'https://f4.bcbits.com/img/a0964464426_16.jpg', '420'));
-        console.log(store.getState());
     }
 
     componentDidMount() {
