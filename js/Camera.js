@@ -17,14 +17,15 @@ export class Camera extends Component {
     constructor(props){
         super(props);
         this.state = {
-            deets: this.props.deets,
-            camNumber: this.props.camNumber
+            name: this.props.name,
+            source: this.props.source,
+            port: this.props.port
         }
     }
 
     render() {
         return(
-            <Image style={{flex:1}} source={{uri: this.state.deets}}/>
+            <Image style={{flex:1}} source={{uri: this.state.source}}/>
         );
     }
 }

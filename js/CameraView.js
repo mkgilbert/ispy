@@ -13,6 +13,7 @@ import {
     Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Camera from './Camera'
 
 var window = Dimensions.get('window');
 
@@ -36,10 +37,15 @@ class CameraView extends Component {
         return route;
     }
     render() {
-        let camData = this.props.route.passProps.camData;
+        let index = this.props.route.passProps.index;
+        let camData = this.props.route.passProps.store.getState().cameras[index].state;
+        console.log(index);
+        console.log(camData);
         return (
             <View style={styles.container}>
-                <Image style={styles.camera} source={{uri: camData.deets}} />
+                <View style={styles.camera}>
+                    <Camera source={camData.source} port={camData.port}/>
+                </View>
                 <Icon name="camera" size={25} style={{padding: 5, alignSelf: 'flex-end'}} />
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight

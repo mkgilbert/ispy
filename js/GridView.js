@@ -15,6 +15,7 @@ export class GridView extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         var {width, height} = Dimensions.get('window');
         var margins = ((this.props.itemMargins!=null) ? this.props.itemMargins : 0);
+        var data = this.formatData(this.props.data.getState().cameras, this.props.itemsPerRow);
         var styles = StyleSheet.create({
             list: {
                 flexWrap:'wrap'
@@ -33,10 +34,24 @@ export class GridView extends Component {
             screenHeight: height,
             itemMargins: margins,
             itemsPerRow: this.props.itemsPerRow,
-            //Format Data into items per row as specified, maybe create a prop-toggle for this functionality?
-            dataSource: ds.cloneWithRows(this.props.data),
+            dataSource: ds.cloneWithRows(data),
             styles: styles,
         };
+    }
+
+    formatData(data, itemsPerRow){
+        var formattedData = [];
+        var elements = data.length;
+        var numRows = Math.ceil(elements/itemsPerRow);
+        for (r=0; r<numRows; r++){
+            formattedData[r] = [];
+            for(c=0; c<itemsPerRow; c++){
+                if(elements==0) return formattedData;
+                formattedData[r][c] = data[r*itemsPerRow+c];
+                elements = elements - 1;
+            }
+        }
+        return formattedData;
     }
 
     calculateSize() {
@@ -49,6 +64,7 @@ export class GridView extends Component {
     renderRow(rowData, sectionID, rowID) {
         var elements = rowData.map(
             (data, i) => {
+                console.log(rowID);
                 return(
                     <TouchableHighlight
                         key={i}
@@ -56,11 +72,8 @@ export class GridView extends Component {
                         onPress={() => this.props.navigator.replace({
                             id: 'CameraView',
                             passProps: {
-                                name: 'Camera' + data.props.camNumber,
-                                camData: {
-                                    id: data.props.camNumber,
-                                    deets: data.props.deets
-                                }
+                                store:this.props.data,
+                                index:rowID*this.state.itemsPerRow+i
                             }
                         })}>
                         {data.render()}

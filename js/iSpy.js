@@ -13,16 +13,19 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 const SideMenu = require('react-native-side-menu');
-
+import { Provider } from 'react-redux'
 import GridView from './GridView';
-import Camera from './Camera'
 import Menu from './Menu';
 import CameraView from './CameraView';
 import EventView from './EventView';
 import CameraSettings from './CameraSettings';
 import CameraEvents from './CameraEvents';
 import CameraAlerts from './CameraAlerts';
+import { addCamera, removeCamera, modifyCameraSettings } from './re_actions'
+import { createStore } from 'redux'
+import reducers from './re_reducers'
 
+let store = createStore(reducers);
 
 class iSpy extends Component {
 
@@ -32,6 +35,17 @@ class iSpy extends Component {
             isOpen: false,
             selectedItem: 'iSpy',
         };
+
+        console.log(store.getState());
+        var unsubscribe = store.subscribe(()=>console.log(store.getState()));
+        store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
+        store.dispatch(addCamera('Camera2', 'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', '69'));
+        store.dispatch(addCamera('Camera3', 'http://wonderfulwoodworkings.com/wp-content/uploads/2016/08/everything-checks-out.png', '42'));
+        store.dispatch(removeCamera(1));
+        store.dispatch(modifyCameraSettings(0, 'l33t', 'http://www.endlessimpact.com/wp-content/uploads/2014/07/testings.jpg', '01'));
+        unsubscribe();
+        store.dispatch(addCamera('Living Room', 'https://f4.bcbits.com/img/a0964464426_16.jpg', '420'));
+        console.log(store.getState());
     }
 
     componentDidMount() {
@@ -72,15 +86,11 @@ class iSpy extends Component {
     renderScene(route, navigator) {
         var navIcon = 'navicon';
         var showBars = true;
-        var stuff = [
-            [new Camera({deets:'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', camNumber: 1})],
-            [new Camera({deets:'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', camNumber: 2})],
-        ];
         const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator} />;
         var componentToRender = null;
         switch (route.id) {
             case 'GridView':
-                componentToRender = <GridView itemMargins={3} itemsPerRow={2} data={stuff} navigator={navigator} />;
+                componentToRender = <GridView itemMargins={3} itemsPerRow={2} data={store} navigator={navigator} />;
                 console.log("component to render is GridView");
                 break;
             case 'EventView':
@@ -91,7 +101,7 @@ class iSpy extends Component {
                 componentToRender = <CameraView navigator={navigator} route={route} />;
                 break;
             case 'CameraSettings':
-                componentToRender = <CameraSettings navigator={navigator} route={route} />;
+                componentToRender = <CameraSettings store={store} navigator={navigator} route={route} />;
                 navIcon = 'arrow-left';
                 showBars = false;
                 break;

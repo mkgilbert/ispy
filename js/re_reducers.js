@@ -3,6 +3,7 @@
  */
 
 import { ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS } from './re_actions'
+import Camera from './Camera'
 
 const initialState = {
     cameras: []
@@ -15,28 +16,22 @@ function reducers(state = initialState, action) {
                 {}, state, {
                     cameras: [
                         ...state.cameras,
-                        {
-                            name: action.name,
-                            source: action.source,
-                            port: action.port
-                        }
+                        new Camera({name:action.name, source:action.source, port:action.port})
                     ]
                 }
             );
         case REMOVE_CAMERA:
-            var newState = Object.Assign({}, state);
-            newState.cameras.splice(action.index);
+            var newState = Object.assign({}, state);
+            newState.cameras.splice(action.index, 1);
             return newState;
         case MODIFY_CAMERA_SETTINGS:
-            return Object.Assign(
+            return Object.assign(
                 {}, state, {
                     cameras: state.cameras.map((camera, index) => {
                             if (index===action.index){
-                                return Object.assign({}, camera, {
-                                    name: action.name,
-                                    source: action.source,
-                                    port: action.port
-                                })
+                                camera.state.name = action.name;
+                                camera.state.source = action.source;
+                                camera.state.port = action.port;
                             }
                             return camera;
                         })
