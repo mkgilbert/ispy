@@ -12,6 +12,7 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
+import { modifyCameraSettings } from './re_actions'
 
 var window = Dimensions.get('window');
 
@@ -19,11 +20,7 @@ class CameraSettings extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            camName: "",
-            camURL: this.props.route.passProps.camData.deets,
-            camPort: ""
-        };
+        this.state = this.props.store.getState().cameras[this.props.route.passProps.camIndex].state;
     }
 
     componentDidMount() {
@@ -37,28 +34,37 @@ class CameraSettings extends Component {
                     <Text style={styles.text}>Name</Text>
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({camName: text})}
-                        value={this.state.camName}
+                        onChangeText={(text) => this.setState({name: text})}
+                        value={this.state.name}
                     />
                     <Text style={styles.text}>URL / IP Address</Text>
                     <TextInput
                         style={styles.textInput}
                         keyboardType='url'
-                        onChangeText={(text) => this.setState({camURL: text})}
-                        value={this.state.camURL}
+                        onChangeText={(text) => this.setState({source: text})}
+                        value={this.state.source}
                     />
                     <Text style={styles.text}>Port</Text>
                     <TextInput
                         style={styles.textInput}
                         keyboardType='numeric'
-                        onChangeText={(text) => this.setState({camPort: text})}
-                        value={this.state.camPort}
+                        onChangeText={(text) => this.setState({port: text})}
+                        value={this.state.port}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.pop()}
+                        onPress={() => {
+                            this.props.store.dispatch(modifyCameraSettings(
+                                    this.props.route.passProps.camIndex,
+                                    this.state.name,
+                                    this.state.source,
+                                    this.state.port
+                                    )
+                                );
+                            this.props.navigator.pop();
+                        }}
                         underlayColor="#EF6C00">
                         <Text style={styles.buttonContent}>Save</Text>
                     </TouchableHighlight>

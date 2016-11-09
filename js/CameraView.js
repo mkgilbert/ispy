@@ -20,6 +20,7 @@ var window = Dimensions.get('window');
 class CameraView extends Component {
     constructor(props) {
         super(props);
+        this.state = {camIndex:0, camData:{}}
     }
 
     componentDidMount() {
@@ -30,21 +31,18 @@ class CameraView extends Component {
         let route = {
             id: screenName,
             passProps: {
-                name: name,
-                camData: this.props.route.passProps.camData
+                camIndex:this.state.index
             }
         };
         return route;
     }
     render() {
-        let index = this.props.route.passProps.index;
-        let camData = this.props.route.passProps.store.getState().cameras[index].state;
-        console.log(index);
-        console.log(camData);
+        this.state.index = this.props.route.passProps.index;
+        this.state.camData = this.props.route.passProps.store.getState().cameras[this.state.index].state;
         return (
             <View style={styles.container}>
                 <View style={styles.camera}>
-                    <Camera source={camData.source} port={camData.port}/>
+                    <Camera source={this.state.camData.source} port={this.state.camData.port}/>
                 </View>
                 <Icon name="camera" size={25} style={{padding: 5, alignSelf: 'flex-end'}} />
                 <View style={styles.buttonContainer}>
