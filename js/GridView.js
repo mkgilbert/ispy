@@ -9,10 +9,11 @@ import {
     TouchableHighlight
 } from 'react-native';
 
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 export class GridView extends Component {
     constructor(props) {
         super(props);
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         var {width, height} = Dimensions.get('window');
         var margins = ((this.props.itemMargins!=null) ? this.props.itemMargins : 0);
         var data = this.formatData(this.props.data.getState().cameras, this.props.itemsPerRow);
@@ -37,6 +38,15 @@ export class GridView extends Component {
             dataSource: ds.cloneWithRows(data),
             styles: styles,
         };
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("Gridview received Props.");
+        this.setState({
+            itemMargins: ((this.props.itemMargins!=null) ? this.props.itemMargins : 0),
+            itemsPerRow: this.props.itemsPerRow,
+            dataSource: ds.cloneWithRows(this.formatData(this.props.data.getState().cameras, this.props.itemsPerRow)),
+        });
     }
 
     formatData(data, itemsPerRow){
@@ -64,7 +74,6 @@ export class GridView extends Component {
     renderRow(rowData, sectionID, rowID) {
         var elements = rowData.map(
             (data, i) => {
-                console.log(rowID);
                 return(
                     <TouchableHighlight
                         key={i}

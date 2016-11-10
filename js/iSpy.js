@@ -18,6 +18,7 @@ import GridView from './GridView';
 import Menu from './Menu';
 import CameraView from './CameraView';
 import EventView from './EventView';
+import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraEvents from './CameraEvents';
 import CameraAlerts from './CameraAlerts';
@@ -36,7 +37,6 @@ class iSpy extends Component {
             selectedItem: 'iSpy',
         };
 
-        console.log(store.getState());
         var unsubscribe = store.subscribe(()=>console.log(store.getState()));
         store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
         store.dispatch(addCamera('Camera2', 'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', '69'));
@@ -44,6 +44,7 @@ class iSpy extends Component {
         store.dispatch(removeCamera(1));
         store.dispatch(modifyCameraSettings(0, 'l33t', 'http://www.endlessimpact.com/wp-content/uploads/2014/07/testings.jpg', '01'));
         store.dispatch(addCamera('Living Room', 'https://f4.bcbits.com/img/a0964464426_16.jpg', '420'));
+        unsubscribe();
     }
 
     componentDidMount() {
@@ -88,7 +89,16 @@ class iSpy extends Component {
         var componentToRender = null;
         switch (route.id) {
             case 'GridView':
-                componentToRender = <GridView itemMargins={3} itemsPerRow={2} data={store} navigator={navigator} />;
+                componentToRender =
+                    <View style={{flex:1}}>
+                        <GridView itemMargins={3} itemsPerRow={2} data={store} navigator={navigator} />
+                        <Icon name="camera" size={35} style={{padding: 5, alignSelf: 'flex-end'}}
+                            onPress={()=>{
+                                navigator.push({id:'CameraAdd',
+                                                passProps:{
+                                                }})
+                            }}/>
+                    </View>;
                 console.log("component to render is GridView");
                 break;
             case 'EventView':
@@ -99,9 +109,14 @@ class iSpy extends Component {
                 componentToRender = <CameraView store={store} navigator={navigator} route={route} />;
                 console.log("CameraView");
                 break;
+            case 'CameraAdd':
+                componentToRender = <CameraAdd store={store} navigator={navigator} route={route}/>
+                navIcon = 'arrow-left';
+                showBars = false;
+                break;
             case 'CameraSettings':
                 componentToRender = <CameraSettings store={store} navigator={navigator} route={route} />;
-                console.log("CameraSettings")
+                console.log("CameraSettings");
                 navIcon = 'arrow-left';
                 showBars = false;
                 break;

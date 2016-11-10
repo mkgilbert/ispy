@@ -25,17 +25,20 @@ class CameraView extends Component {
             camData:this.props.store.getState().cameras[this.props.route.passProps.index].state
         }
 
-        this.props.store.subscribe(() => {
+        this.unsubscribe = this.props.store.subscribe(() => {
             this.setState({
                 camData:this.props.store.getState().cameras[this.state.camIndex].state
             });
-            console.log("State Set.")
             }
         );
     }
 
     componentDidMount() {
         window = Dimensions.get('window');
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     buildRoute(screenName, name) {
