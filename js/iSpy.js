@@ -96,6 +96,7 @@ class iSpy extends Component {
                             onPress={()=>{
                                 navigator.push({id:'CameraAdd',
                                                 passProps:{
+                                                    name: 'Add Camera'
                                                 }})
                             }}/>
                     </View>;
