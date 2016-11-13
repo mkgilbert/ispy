@@ -25,6 +25,6 @@ export function modifyCameraSettings(index, name, source, port) {
     return { type : MODIFY_CAMERA_SETTINGS, index, name, source, port }
 }
 
-export function addEvent(cameraIndex, eventType) {
-    return { type: ADD_EVENT, cameraIndex,  eventType }
+export function addEvent(camIndex, eventType) {
+    return { type: ADD_EVENT, camIndex,  eventType }
 }

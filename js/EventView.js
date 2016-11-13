@@ -15,15 +15,21 @@ class EventView extends Component {
     constructor(props) {
         super(props);
         this.state = this.props.store.getState();
-        console.log(this.state);
+        this.state.camIndex = ((this.props.route.passProps.camIndex!=null) ? this.props.route.passProps.camIndex : -1 );
     }
 
     render() {
-        var eventLog = this.state.events.map(
+        var events = this.state.events;
+        if (this.state.camIndex!=-1){
+            events = events.filter((t)=> {
+                    return t.camIndex==this.state.camIndex;
+                }
+            , this);
+        }
+        var eventLog = events.map(
             (data, i) => {
-                console.log(data.cameraID);
                 return(
-                    <Text key={i}>{this.state.cameras[data.cameraIndex].state.name}: {data.eventType}</Text>
+                    <Text key={i}>{this.state.cameras[data.camIndex].state.name}: {data.eventType}</Text>
                 );
             }
         , this);

@@ -102,7 +102,11 @@ class iSpy extends Component {
                 console.log("component to render is GridView");
                 break;
             case 'EventView':
-                componentToRender = <EventView store={store} navigator={navigator} />;
+                componentToRender = <EventView store={store} navigator={navigator} route={route}/>;
+                if(route.passProps.camIndex!=null){
+                    navIcon = 'arrow-left';
+                    showBars = false;
+                }
                 console.log("component to render is EventView");
                 break;
             case 'CameraView':
@@ -122,11 +126,6 @@ class iSpy extends Component {
                 break;
             case 'CameraAlerts':
                 componentToRender = <CameraAlerts store={store} navigator={navigator} route={route} />;
-                navIcon = 'arrow-left';
-                showBars = false;
-                break;
-            case 'CameraEvents':
-                componentToRender = <CameraEvents store={store} navigator={navigator} route={route} />;
                 navIcon = 'arrow-left';
                 showBars = false;
                 break;

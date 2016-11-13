@@ -44,7 +44,7 @@ function reducers(state = initialState, action) {
                     events: [
                         ...state.events,
                         {
-                            cameraIndex: action.cameraIndex,
+                            camIndex: action.camIndex,
                             eventType: action.eventType
                         }
                     ]

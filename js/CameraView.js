@@ -77,7 +77,7 @@ class CameraView extends Component {
                     </TouchableHighlight>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.push(this.buildRoute('CameraEvents', 'Events'))}>
+                        onPress={() => this.props.navigator.push(this.buildRoute('EventView', 'Events'))}>
                         <View style={styles.buttonView}>
                             <Icon name="calendar-o" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Events</Text>
