@@ -2,11 +2,12 @@
  * Created by Tanner Stevens on 11/8/2016.
  */
 
-import { ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS } from './re_actions'
+import { ADD_EVENT, ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS } from './re_actions'
 import Camera from './Camera'
 
 const initialState = {
-    cameras: []
+    cameras: [],
+    events: []
 };
 
 function reducers(state = initialState, action) {
@@ -35,6 +36,18 @@ function reducers(state = initialState, action) {
                             }
                             return camera;
                         })
+                }
+            );
+        case ADD_EVENT:
+            return Object.assign(
+                {}, state, {
+                    events: [
+                        ...state.events,
+                        {
+                            cameraIndex: action.cameraIndex,
+                            eventType: action.eventType
+                        }
+                    ]
                 }
             );
         default:

@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 const SideMenu = require('react-native-side-menu');
-import { Provider } from 'react-redux'
 import GridView from './GridView';
 import Menu from './Menu';
 import CameraView from './CameraView';
@@ -22,7 +21,7 @@ import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraEvents from './CameraEvents';
 import CameraAlerts from './CameraAlerts';
-import { addCamera, removeCamera, modifyCameraSettings } from './re_actions'
+import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
 
@@ -44,6 +43,7 @@ class iSpy extends Component {
         store.dispatch(removeCamera(1));
         store.dispatch(modifyCameraSettings(0, 'l33t', 'http://www.endlessimpact.com/wp-content/uploads/2014/07/testings.jpg', '01'));
         store.dispatch(addCamera('Living Room', 'https://f4.bcbits.com/img/a0964464426_16.jpg', '420'));
+        store.dispatch(addEvent(0, EventTypes.CAMERA_OFF));
         unsubscribe();
     }
 

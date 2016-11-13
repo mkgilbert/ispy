@@ -14,11 +14,23 @@ import {
 class EventView extends Component {
     constructor(props) {
         super(props);
+        this.state = this.props.store.getState();
+        console.log(this.state);
     }
 
     render() {
+        var eventLog = this.state.events.map(
+            (data, i) => {
+                console.log(data.cameraID);
+                return(
+                    <Text key={i}>{this.state.cameras[data.cameraIndex].state.name}: {data.eventType}</Text>
+                );
+            }
+        , this);
         return (
-            <Text>Events Page</Text>
+            <View>
+                {eventLog}
+            </View>
         );
     }
 }
