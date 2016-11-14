@@ -10,9 +10,11 @@ import {
     TextInput,
     View,
     TouchableHighlight,
-    Image
+    Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Hr from 'react-native-hr';
+import Alert from './Alert';
 
 var window = Dimensions.get('window');
 
@@ -29,18 +31,14 @@ class CameraAlerts extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <Text style={styles.text}>Name</Text>
-                    <Text style={styles.text}>Enabled</Text>
+                    <Text style={styles.text}>Type         </Text>
+                    <Text style={styles.text}>Off/On</Text>
                     <Text style={styles.text}>Delete</Text>
                 </View>
                 <View style={styles.list}>
-                    <Text style={{fontSize: 16}}>my alert 1</Text>
-                    <TouchableHighlight>
-                        <Icon name="toggle-on" size={35} />
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <Icon name="trash" size={35} />
-                    </TouchableHighlight>
+                    <Alert type="Motion Det"/>
+                    <Hr lineColor="grey"/>
+                    <Alert type="Power Fail" />
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
@@ -71,8 +69,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     list: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 15
