@@ -6,7 +6,6 @@
 export const ADD_CAMERA = 'ADD_CAMERA';
 export const REMOVE_CAMERA = 'REMOVE_CAMERA';
 export const MODIFY_CAMERA_SETTINGS = 'MODIFY_CAMERA_SETTINGS';
-export const ADD_ALERT = 'ADD_ALERT';
 export const ADD_EVENT = 'ADD_EVENT';
 export const EventTypes = {
     CAMERA_ON: 'CAMERA_ON',
