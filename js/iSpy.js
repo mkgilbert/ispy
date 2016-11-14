@@ -21,7 +21,8 @@ import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraEvents from './CameraEvents';
 import CameraAlerts from './CameraAlerts';
-import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes } from './re_actions'
+import AlertAdd from './AlertAdd';
+import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
 
@@ -127,6 +128,11 @@ class iSpy extends Component {
                 break;
             case 'CameraAlerts':
                 componentToRender = <CameraAlerts store={store} navigator={navigator} route={route} />;
+                navIcon = 'arrow-left';
+                showBars = false;
+                break;
+            case 'AlertAdd':
+                componentToRender = <AlertAdd store={store} navigator={navigator} route={route} />
                 navIcon = 'arrow-left';
                 showBars = false;
                 break;

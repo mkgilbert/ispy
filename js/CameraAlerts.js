@@ -43,7 +43,7 @@ class CameraAlerts extends Component {
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.pop()}>
+                        onPress={() => this.props.navigator.push({id: 'AlertAdd', passProps: {name: 'Add Alert'}})}>
                         <Icon name="plus-circle" size={75} color="orange"/>
                     </TouchableHighlight>
                 </View>
