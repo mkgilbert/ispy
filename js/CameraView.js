@@ -45,7 +45,8 @@ class CameraView extends Component {
         let route = {
             id: screenName,
             passProps: {
-                camIndex:this.state.camIndex
+                camIndex: this.state.camIndex,
+                name: 'Camera' + (this.state.camIndex + 1) + ' ' + name
             }
         };
         return route;

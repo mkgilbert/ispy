@@ -6,7 +6,7 @@
 export const ADD_CAMERA = 'ADD_CAMERA';
 export const REMOVE_CAMERA = 'REMOVE_CAMERA';
 export const MODIFY_CAMERA_SETTINGS = 'MODIFY_CAMERA_SETTINGS';
-
+export const ADD_ALERT = 'ADD_ALERT';
 export const ADD_EVENT = 'ADD_EVENT';
 export const EventTypes = {
     CAMERA_ON: 'CAMERA_ON',
@@ -32,10 +32,6 @@ export function addEvent(camIndex, eventType) {
     return { type: ADD_EVENT, camIndex,  eventType }
 }
 
-export function addAlert(camIndex, eventType){
-    return { type: ADD_ALERT, camIndex, eventType }
-}
-
-export function removeAlert(camIndex, eventType){
-    return { type: REMOVE_ALERT, camIndex, eventType }
+export function addAlert(camIndex, email, alertType) {
+    return { type: ADD_ALERT, camIndex, alertType }
 }
