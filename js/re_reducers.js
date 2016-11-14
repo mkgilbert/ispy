@@ -2,12 +2,13 @@
  * Created by Tanner Stevens on 11/8/2016.
  */
 
-import { ADD_EVENT, ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS } from './re_actions'
+import { ADD_ALERT, REMOVE_ALERT, TOGGLE_ALERT, ADD_EVENT, ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS } from './re_actions'
 import Camera from './Camera'
 
 const initialState = {
     cameras: [],
-    events: []
+    events: [],
+    alerts: []
 };
 
 function reducers(state = initialState, action) {
@@ -48,6 +49,22 @@ function reducers(state = initialState, action) {
                             eventType: action.eventType
                         }
                     ]
+                }
+            );
+        case ADD_ALERT:
+            return Object.assign(
+                {}, state, {
+                    alerts: [
+                        ...state.alerts,
+                        String(action.camIndex)+String(action.eventType)
+                    ]
+                }
+            );
+        case REMOVE_ALERT:
+            var nAlerts = state.alerts.filter((t)=>{var asd = String(action.camIndex)+String(action.eventType); return t!=asd;});
+            return Object.assign(
+                {}, state, {
+                    alerts:nAlerts
                 }
             );
         default:
