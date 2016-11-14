@@ -12,15 +12,16 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
+import ModalDropDown from 'react-native-modal-dropdown';
+
 import { addAlert } from './re_actions'
 
 var window = Dimensions.get('window');
+const alert_types = ['Motion Det', 'Power Fail'];
 
 class AlertAdd extends Component {
     constructor(props) {
         super(props);
-
-        this.types = ['Motion Det', 'Power Fail'];
 
         this.state = {
             type: '',
@@ -37,15 +38,10 @@ class AlertAdd extends Component {
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.text}>Alert Type</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        onChangeText={(text) => this.setState({type: text})}
-                        value={this.state.type}
-                    />
+                    <ModalDropDown options={alert_types}/>
                     <Text style={styles.text}>Email Address</Text>
                     <TextInput
                         style={styles.textInput}
-                        keyboardType='url'
                         onChangeText={(text) => this.setState({email: text})}
                         value={this.state.email}
                     />
