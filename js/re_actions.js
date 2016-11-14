@@ -32,6 +32,6 @@ export function addEvent(camIndex, eventType) {
     return { type: ADD_EVENT, camIndex,  eventType }
 }
 
-export function addAlert(camIndex, email, alertType) {
-    return { type: ADD_ALERT, camIndex, alertType }
+export function addAlert(camIndex, email, eventType) {
+    return { type: ADD_ALERT, camIndex, email, eventType }
 }

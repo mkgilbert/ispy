@@ -21,7 +21,7 @@ import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
 import AlertAdd from './AlertAdd';
-import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert, removeAlert } from './re_actions'
+import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
 
@@ -48,9 +48,6 @@ class iSpy extends Component {
         store.dispatch(addEvent(2, EventTypes.CAMERA_ON));
         store.dispatch(addEvent(0, EventTypes.CAMERA_OFF));
         store.dispatch(addEvent(0, EventTypes.CAMERA_ON));
-        store.dispatch(addAlert(0, EventTypes.CAMERA_ON));
-        store.dispatch(removeAlert(0, EventTypes.CAMERA_ON));
-        store.dispatch(addAlert(0, EventTypes.CAMERA_ON));
         unsubscribe();
     }
 

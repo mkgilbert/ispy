@@ -58,7 +58,7 @@ function reducers(state = initialState, action) {
                         ...state.alerts,
                         {
                             camIndex: action.camIndex,
-                            alertType: action.alertType,
+                            eventType: action.eventType,
                             email: action.email
                         }
                     ]
