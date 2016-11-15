@@ -6,6 +6,7 @@ import {
     Dimensions,
     ListView,
     StyleSheet,
+    Switch,
     Text,
     TextInput,
     View,
@@ -27,21 +28,14 @@ class Alert extends Component {
         window = Dimensions.get('window');
     }
 
-    setEnabled(bool) {
-        this.setState({
-            isEnabled: bool
-        });
-    }
     render() {
         return (
             <View style={styles.container}>
                     <Text style={styles.text}>{this.state.type}</Text>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={() => this.setEnabled(!this.state.isEnabled)}>
-                        {this.state.isEnabled ? <Icon name="toggle-on" size={35} />
-                         : <Icon name="toggle-off" size={35}/>}
-                    </TouchableHighlight>
+                    <Switch
+                        onValueChange={(value)=>this.setState({isEnabled: value})}
+                        value={this.state.isEnabled}
+                    />
                     <TouchableHighlight
                         style={styles.button}>
                         <Icon name="trash" size={35} />

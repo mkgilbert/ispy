@@ -23,7 +23,7 @@ class CameraView extends Component {
         this.state = {
             camIndex:this.props.route.passProps.index,
             camData:this.props.store.getState().cameras[this.props.route.passProps.index].state
-        }
+        };
 
         this.unsubscribe = this.props.store.subscribe(() => {
             this.setState({

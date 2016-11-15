@@ -48,6 +48,8 @@ class iSpy extends Component {
         store.dispatch(addEvent(2, EventTypes.CAMERA_ON));
         store.dispatch(addEvent(0, EventTypes.CAMERA_OFF));
         store.dispatch(addEvent(0, EventTypes.CAMERA_ON));
+        store.dispatch(addAlert(0, 'aklsdklasdklasm', EventTypes.CAMERA_OFF));
+        store.dispatch(addAlert(0, 'aklsdklasdklasm', EventTypes.CAMERA_ON));
     }
 
     componentDidMount() {

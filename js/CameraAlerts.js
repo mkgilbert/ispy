@@ -40,12 +40,15 @@ class CameraAlerts extends Component {
                             <Text style={styles.text}>Delete</Text>
                         </View>);
 
-        this.state = {
-            camIndex: this.props.route.passProps.index,
-            alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
-            dataSource: ds.cloneWithRows(this.props.store.getState().alerts.filter(this.filterAlerts, this)),
-        };
+        var filtered = this.props.store.getState().alerts.filter(this.filterAlerts, this);
+        console.log(filtered);
 
+        this.state = {
+            camIndex: this.props.route.passProps.camIndex,
+            alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
+            dataSource: ds.cloneWithRows(filtered),
+        };
+        console.log(this.state);
         this.unsubscribe = this.props.store.subscribe(()=>{
             this.setState({
                 alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
@@ -54,7 +57,7 @@ class CameraAlerts extends Component {
     }
 
     filterAlerts(t){
-        if (t.camIndex!=this.props.route.passProps.index) return false;
+        if (t.camIndex!=this.props.route.passProps.camIndex) return false;
         return true;
     }
 
@@ -77,19 +80,9 @@ class CameraAlerts extends Component {
     }
 
     renderRow(rowData) {
-        console.log(rowData);
-        var elements = rowData.map(
-            (data, i) => {
-                return (
-                  <View key={i}>
-                      <Text>{data}</Text>
-                  </View>
-                );
-            }
-        );
         return (
             <View>
-                {elements}
+                <Alert type={rowData.eventType} isEnabled={true}/>
             </View>
         );
     }
