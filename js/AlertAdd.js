@@ -23,6 +23,7 @@ class AlertAdd extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props.route.passProps.camIndex)
         this.state = {
             type: '',
             email:''
@@ -60,9 +61,9 @@ class AlertAdd extends Component {
                         style={styles.button}
                         onPress={() => {
                             this.props.store.dispatch(addAlert(
+                                this.props.route.passProps.camIndex,
                                 this.state.type,
                                 this.state.email,
-                                this.props.route.passProps.camIndex
                                 )
                             );
                             this.props.navigator.pop();

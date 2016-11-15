@@ -36,7 +36,7 @@ class iSpy extends Component {
             selectedItem: 'iSpy',
         };
 
-        var unsubscribe = store.subscribe(()=>console.log(store.getState()));
+        this.unsubscribe = store.subscribe(()=>console.log(store.getState()));
         store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
         store.dispatch(addCamera('Camera2', 'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', '69'));
         store.dispatch(addCamera('Camera3', 'http://wonderfulwoodworkings.com/wp-content/uploads/2016/08/everything-checks-out.png', '42'));
@@ -48,7 +48,6 @@ class iSpy extends Component {
         store.dispatch(addEvent(2, EventTypes.CAMERA_ON));
         store.dispatch(addEvent(0, EventTypes.CAMERA_OFF));
         store.dispatch(addEvent(0, EventTypes.CAMERA_ON));
-        unsubscribe();
     }
 
     componentDidMount() {
@@ -56,7 +55,7 @@ class iSpy extends Component {
     }
 
     componentWillUnmount() {
-
+        this.unsubscribe();
     }
 
     toggle() {

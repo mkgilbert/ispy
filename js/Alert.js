@@ -20,7 +20,7 @@ class Alert extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEnabled: false,
+            isEnabled: this.props.enabled!=null ? this.props.enabled : true,
             type: this.props.type
         }
     }

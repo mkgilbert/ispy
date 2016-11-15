@@ -21,10 +21,28 @@ var window = Dimensions.get('window');
 class CameraAlerts extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            camIndex:this.props.route.passProps.index,
+            alerts:this.props.store.getState().alerts.filter(this.filterAlerts, this),
+        }
+        this.unsubscribe = this.props.store.subscribe(()=>{
+            this.setState({
+                alerts:this.props.store.getState().alerts.filter(this.filterAlerts(t), this),
+            });
+        })
+    }
+
+    filterAlerts(t){
+        if (t.camIndex!=this.props.route.passProps.index) return false;
+        return true;
     }
 
     componentDidMount() {
         window = Dimensions.get('window');
+    }
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     buildRoute(screenName, name) {
@@ -51,10 +69,6 @@ class CameraAlerts extends Component {
                     <Hr lineColor="grey"/>
                     <Alert type="Power Fail" />
                 </View>
-                <ListView
-                    >
-
-                </ListView>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
