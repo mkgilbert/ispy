@@ -18,19 +18,39 @@ import Alert from './Alert';
 
 var window = Dimensions.get('window');
 
+
+
 class CameraAlerts extends Component {
     constructor(props) {
         super(props);
 
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+        var footer = (<View style={styles.buttonContainer}>
+            <TouchableHighlight
+                style={styles.button}
+                onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
+                <Icon name="plus-circle" size={75} color="orange"/>
+            </TouchableHighlight>
+        </View>);
+
+        var header = (<View style={styles.headerContainer}>
+                            <Text style={styles.text}>Type         </Text>
+                            <Text style={styles.text}>Off/On</Text>
+                            <Text style={styles.text}>Delete</Text>
+                        </View>);
+
         this.state = {
-            camIndex:this.props.route.passProps.index,
-            alerts:this.props.store.getState().alerts.filter(this.filterAlerts, this),
-        }
+            camIndex: this.props.route.passProps.index,
+            alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
+            dataSource: ds.cloneWithRows(this.props.store.getState().alerts.filter(this.filterAlerts, this)),
+        };
+
         this.unsubscribe = this.props.store.subscribe(()=>{
             this.setState({
-                alerts:this.props.store.getState().alerts.filter(this.filterAlerts(t), this),
+                alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
             });
-        })
+        });
     }
 
     filterAlerts(t){
@@ -52,31 +72,33 @@ class CameraAlerts extends Component {
                 camIndex: this.props.route.passProps.camIndex,
                 name: name
             }
-        }
+        };
         return route;
     }
 
+    renderRow(rowData) {
+        console.log(rowData);
+        var elements = rowData.map(
+            (data, i) => {
+                return (
+                  <View key={i}>
+                      <Text>{data.render()}</Text>
+                  </View>
+                );
+            }
+        );
+        return (
+            <View>
+                {elements}
+            </View>
+        );
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.text}>Type         </Text>
-                    <Text style={styles.text}>Off/On</Text>
-                    <Text style={styles.text}>Delete</Text>
-                </View>
-                <View style={styles.list}>
-                    <Alert type="Motion Det"/>
-                    <Hr lineColor="grey"/>
-                    <Alert type="Power Fail" />
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
-                        <Icon name="plus-circle" size={75} color="orange"/>
-                    </TouchableHighlight>
-                </View>
-            </View>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow.bind(this)}
+                />
         );
     }
 }
