@@ -14,8 +14,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-var window = Dimensions.get('window');
-
 class Alert extends Component {
     constructor(props) {
         super(props);

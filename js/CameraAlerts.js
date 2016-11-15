@@ -82,7 +82,7 @@ class CameraAlerts extends Component {
             (data, i) => {
                 return (
                   <View key={i}>
-                      <Text>{data.render()}</Text>
+                      <Text>{data}</Text>
                   </View>
                 );
             }
