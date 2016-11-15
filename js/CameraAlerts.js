@@ -27,6 +27,17 @@ class CameraAlerts extends Component {
         window = Dimensions.get('window');
     }
 
+    buildRoute(screenName, name) {
+        let route = {
+            id: screenName,
+            passProps: {
+                camIndex: this.props.route.passProps.camIndex,
+                name: name
+            }
+        }
+        return route;
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -40,10 +51,14 @@ class CameraAlerts extends Component {
                     <Hr lineColor="grey"/>
                     <Alert type="Power Fail" />
                 </View>
+                <ListView
+                    >
+
+                </ListView>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.push({id: 'AlertAdd', passProps: {name: 'Add Alert'}})}>
+                        onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
                         <Icon name="plus-circle" size={75} color="orange"/>
                     </TouchableHighlight>
                 </View>
