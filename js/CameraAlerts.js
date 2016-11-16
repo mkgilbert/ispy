@@ -16,11 +16,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Hr from 'react-native-hr';
 import Alert from './Alert';
 import CameraAlertsHeader from './CameraAlertsHeader';
+import CameraAlertsFooter from './CameraAlertsFooter';
 
 var window = Dimensions.get('window');
-
-// header and footer for CameraAlerts page
-
 
 
 class CameraAlerts extends Component {
@@ -28,16 +26,6 @@ class CameraAlerts extends Component {
         super(props);
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
-         this.footer = (<View style={styles.buttonContainer}>
-            <TouchableHighlight
-                style={styles.button}
-                onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
-                <Icon name="plus-circle" size={75} color="orange"/>
-            </TouchableHighlight>
-        </View>);
-
-
 
         var filtered = this.props.store.getState().alerts.filter(this.filterAlerts, this);
         console.log(filtered);
@@ -87,12 +75,19 @@ class CameraAlerts extends Component {
     }
     render() {
         return (
+            <View style={styles.container}>
             <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}
                 renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
                 renderHeader={() => <CameraAlertsHeader />}
             />
+            <TouchableHighlight
+                style={styles.button}
+                onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
+                <Icon name="plus-circle" size={75} color="orange"/>
+            </TouchableHighlight>
+            </View>
         );
     }
 }
@@ -129,6 +124,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     button: {
+        margin: 5,
         alignSelf: 'flex-end'
     },
     buttonContent: {

@@ -20,7 +20,7 @@ import EventView from './EventView';
 import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
-//import AlertAdd from './AlertAdd';
+import AlertAdd from './AlertAdd';
 import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
