@@ -56,6 +56,7 @@ class CameraSettings extends Component {
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => {
+                            console.log(this.props.route.passProps.camIndex);
                             this.props.store.dispatch(modifyCameraSettings(
                                     this.props.route.passProps.camIndex,
                                     this.state.name,

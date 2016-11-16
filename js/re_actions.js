@@ -9,7 +9,8 @@ export const MODIFY_CAMERA_SETTINGS = 'MODIFY_CAMERA_SETTINGS';
 export const ADD_EVENT = 'ADD_EVENT';
 export const EventTypes = {
     CAMERA_ON: 'CAMERA_ON',
-    CAMERA_OFF: 'CAMERA_OFF'
+    CAMERA_OFF: 'CAMERA_OFF',
+    MOTION_DET: 'MOTION_DET',
 };
 
 export const ADD_ALERT = 'ADD_ALERT';
@@ -19,12 +20,12 @@ export function addCamera(name, source, port) {
     return { type: ADD_CAMERA, name, source, port }
 }
 
-export function removeCamera(index) {
-    return { type: REMOVE_CAMERA, index }
+export function removeCamera(camIndex) {
+    return { type: REMOVE_CAMERA, camIndex }
 }
 
-export function modifyCameraSettings(index, name, source, port) {
-    return { type : MODIFY_CAMERA_SETTINGS, index, name, source, port }
+export function modifyCameraSettings(camIndex, name, source, port) {
+    return { type : MODIFY_CAMERA_SETTINGS, camIndex, name, source, port }
 }
 
 export function addEvent(camIndex, eventType) {
