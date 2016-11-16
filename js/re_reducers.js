@@ -43,6 +43,7 @@ function reducers(state = initialState, action) {
                 }
             );
         case ADD_EVENT:
+            //var email = new Email({email: '', camId: '', event: ''});
             return Object.assign(
                 {}, state, {
                     events: [
