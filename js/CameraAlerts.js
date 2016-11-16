@@ -82,7 +82,7 @@ class CameraAlerts extends Component {
     renderRow(rowData) {
         return (
             <View>
-                <Alert type={rowData.eventType} isEnabled={true}/>
+                <Alert type={rowData.eventType} enabled={true}/>
             </View>
         );
     }
