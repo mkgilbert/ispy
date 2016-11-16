@@ -23,6 +23,7 @@ import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
 import PuppetMaster from './PuppetMaster';
 import AlertAdd from './AlertAdd';
+import Splash from './Splash';
 import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
@@ -85,7 +86,7 @@ class iSpy extends Component {
     render() {
         return (
             <Navigator
-                initialRoute={{id: 'GridView', passProps: {name: 'iSpy'}}}
+                initialRoute={{id: 'Splash', passProps: {name: 'iSpy'}}}
                 renderScene={this.renderScene.bind(this)}
             />
         );
@@ -103,6 +104,9 @@ class iSpy extends Component {
         }
 
         switch (route.id) {
+            case 'Splash':
+                componentToRender = <Splash navigator={navigator} route={route} />;
+                break;
             case 'GridView':
                 componentToRender =
                     <View style={{flex:1}}>
