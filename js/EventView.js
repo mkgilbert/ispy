@@ -15,14 +15,22 @@ class EventView extends Component {
     constructor(props) {
         super(props);
         this.state = this.props.store.getState();
-        this.state.camIndex = ((this.props.route.passProps.camIndex!=null) ? this.props.route.passProps.camIndex : -1 );
+        this.camIndex = ((this.props.route.passProps.camIndex!=null) ? this.props.route.passProps.camIndex : -1 );
+        this.unsubscribe = this.props.store.subscribe(()=>{
+            this.setState(this.props.store.getState());
+            }
+            ,this)
+    }
+
+    componentWillUnmount(){
+        this.unsubscribe();
     }
 
     render() {
         var events = this.state.events;
-        if (this.state.camIndex!=-1){
+        if (this.camIndex!=-1){
             events = events.filter((t)=> {
-                    return t.camIndex==this.state.camIndex;
+                    return t.camIndex==this.camIndex;
                 }
             , this);
         }

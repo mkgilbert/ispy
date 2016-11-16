@@ -20,6 +20,7 @@ import EventView from './EventView';
 import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
+import PuppetMaster from './PuppetMaster';
 //import AlertAdd from './AlertAdd';
 import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
@@ -35,6 +36,7 @@ class iSpy extends Component {
             isOpen: false,
             selectedItem: 'iSpy',
         };
+        this.puppetMaster = new PuppetMaster(store);
 
         this.unsubscribe = store.subscribe(()=>console.log(store.getState()));
         store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
@@ -53,7 +55,7 @@ class iSpy extends Component {
     }
 
     componentDidMount() {
-
+        this.puppetMaster.startRolling();
     }
 
     componentWillUnmount() {
