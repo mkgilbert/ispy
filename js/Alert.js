@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
     text: {
         justifyContent: 'flex-start',
-        fontSize: 18,
+        fontSize: 16,
         marginTop: 20,
         marginBottom: 20
     },

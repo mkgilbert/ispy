@@ -15,8 +15,11 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Hr from 'react-native-hr';
 import Alert from './Alert';
+import CameraAlertsHeader from './CameraAlertsHeader';
 
 var window = Dimensions.get('window');
+
+// header and footer for CameraAlerts page
 
 
 
@@ -26,7 +29,7 @@ class CameraAlerts extends Component {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        var footer = (<View style={styles.buttonContainer}>
+         this.footer = (<View style={styles.buttonContainer}>
             <TouchableHighlight
                 style={styles.button}
                 onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
@@ -34,11 +37,7 @@ class CameraAlerts extends Component {
             </TouchableHighlight>
         </View>);
 
-        var header = (<View style={styles.headerContainer}>
-                            <Text style={styles.text}>Type         </Text>
-                            <Text style={styles.text}>Off/On</Text>
-                            <Text style={styles.text}>Delete</Text>
-                        </View>);
+
 
         var filtered = this.props.store.getState().alerts.filter(this.filterAlerts, this);
         console.log(filtered);
@@ -81,17 +80,19 @@ class CameraAlerts extends Component {
 
     renderRow(rowData) {
         return (
-            <View>
+            <View style={styles.list}>
                 <Alert type={rowData.eventType} enabled={true}/>
             </View>
         );
     }
     render() {
         return (
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={this.renderRow.bind(this)}
-                />
+            <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRow.bind(this)}
+                renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+                renderHeader={() => <CameraAlertsHeader />}
+            />
         );
     }
 }
@@ -112,10 +113,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
     },
+    separator: {
+        flex: 1,
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: '#8E8E8E'
+    },
     list: {
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 15
+        marginLeft: 20,
+        marginRight: 20
     },
     buttonContainer: {
         flex: 1,
