@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
+    Dimensions,
     TouchableNativeFeedback,
     StyleSheet,
     Text,
@@ -26,6 +27,7 @@ import { createStore } from 'redux'
 import reducers from './re_reducers'
 
 let store = createStore(reducers);
+var window = Dimensions.get('window');
 
 class iSpy extends Component {
 
@@ -92,6 +94,12 @@ class iSpy extends Component {
         var showBars = true;
         const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator} />;
         var componentToRender = null;
+
+        //Bandaid Fix
+        if(route.id==='CameraView' && route.passProps.camIndex>-1){
+            route.passProps.name = store.getState().cameras[route.passProps.camIndex].state.name
+        }
+
         switch (route.id) {
             case 'GridView':
                 componentToRender =

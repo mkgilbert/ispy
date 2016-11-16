@@ -20,12 +20,12 @@ export function addCamera(name, source, port) {
     return { type: ADD_CAMERA, name, source, port }
 }
 
-export function removeCamera(index) {
-    return { type: REMOVE_CAMERA, index }
+export function removeCamera(camIndex) {
+    return { type: REMOVE_CAMERA, camIndex }
 }
 
-export function modifyCameraSettings(index, name, source, port) {
-    return { type : MODIFY_CAMERA_SETTINGS, index, name, source, port }
+export function modifyCameraSettings(camIndex, name, source, port) {
+    return { type : MODIFY_CAMERA_SETTINGS, camIndex, name, source, port }
 }
 
 export function addEvent(camIndex, eventType) {
