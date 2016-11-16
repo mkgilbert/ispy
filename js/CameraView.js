@@ -21,16 +21,9 @@ class CameraView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            camIndex:this.props.route.passProps.index,
-            camData:this.props.store.getState().cameras[this.props.route.passProps.index].state
+            camIndex:this.props.route.passProps.camIndex,
+            camData:this.props.store.getState().cameras[this.props.route.passProps.camIndex].state
         };
-
-        this.unsubscribe = this.props.store.subscribe(() => {
-            this.setState({
-                camData:this.props.store.getState().cameras[this.state.camIndex].state
-            });
-            }
-        );
     }
 
     componentDidMount() {
@@ -38,7 +31,14 @@ class CameraView extends Component {
     }
 
     componentWillUnmount() {
-        this.unsubscribe();
+
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            camIndex:this.props.route.passProps.camIndex,
+            camData:this.props.store.getState().cameras[this.state.camIndex].state
+        });
     }
 
     buildRoute(screenName, name) {
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     camera: {
-        width: window.width,
-        height: window.width,
+        width: window.width < window.height ? window.width : window.height,
+        height: window.width < window.height ? window.width : window.height,
         backgroundColor: 'grey',
     },
     buttonContainer: {

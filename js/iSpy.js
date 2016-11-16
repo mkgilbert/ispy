@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
+    Dimensions,
     TouchableNativeFeedback,
     StyleSheet,
     Text,
@@ -20,12 +21,14 @@ import EventView from './EventView';
 import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
+import PuppetMaster from './PuppetMaster';
 import AlertAdd from './AlertAdd';
 import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
 
 let store = createStore(reducers);
+var window = Dimensions.get('window');
 
 class iSpy extends Component {
 
@@ -35,6 +38,7 @@ class iSpy extends Component {
             isOpen: false,
             selectedItem: 'iSpy',
         };
+        this.puppetMaster = new PuppetMaster(store);
 
         this.unsubscribe = store.subscribe(()=>console.log(store.getState()));
         store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
@@ -53,7 +57,7 @@ class iSpy extends Component {
     }
 
     componentDidMount() {
-
+        this.puppetMaster.startRolling();
     }
 
     componentWillUnmount() {
@@ -92,6 +96,12 @@ class iSpy extends Component {
         var showBars = true;
         const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator} />;
         var componentToRender = null;
+
+        //Bandaid Fix
+        if(route.id==='CameraView' && route.passProps.camIndex>-1){
+            route.passProps.name = store.getState().cameras[route.passProps.camIndex].state.name
+        }
+
         switch (route.id) {
             case 'GridView':
                 componentToRender =

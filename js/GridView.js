@@ -81,7 +81,7 @@ export class GridView extends Component {
                         onPress={() => this.props.navigator.replace({
                             id: 'CameraView',
                             passProps: {
-                                index: rowID*this.state.itemsPerRow+i,
+                                camIndex: rowID*this.state.itemsPerRow+i,
                                 name: data.state.name
                             }
                         })}>
