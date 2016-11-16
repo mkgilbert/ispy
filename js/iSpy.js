@@ -20,7 +20,8 @@ import EventView from './EventView';
 import CameraAdd from './CameraAdd';
 import CameraSettings from './CameraSettings';
 import CameraAlerts from './CameraAlerts';
-import AlertAdd from './AlertAdd';
+import PuppetMaster from './PuppetMaster';
+//import AlertAdd from './AlertAdd';
 import { addCamera, removeCamera, modifyCameraSettings, addEvent, EventTypes, addAlert } from './re_actions'
 import { createStore } from 'redux'
 import reducers from './re_reducers'
@@ -35,8 +36,9 @@ class iSpy extends Component {
             isOpen: false,
             selectedItem: 'iSpy',
         };
+        this.puppetMaster = new PuppetMaster(store);
 
-        var unsubscribe = store.subscribe(()=>console.log(store.getState()));
+        this.unsubscribe = store.subscribe(()=>console.log(store.getState()));
         store.dispatch(addCamera('Camera1', 'http://smartersearches.com/wp-content/uploads/2015/05/puppy1.png', '22'));
         store.dispatch(addCamera('Camera2', 'http://pprtravelnursing.com/wp-content/uploads/sites/4/2014/05/EBSLogo.jpg', '69'));
         store.dispatch(addCamera('Camera3', 'http://wonderfulwoodworkings.com/wp-content/uploads/2016/08/everything-checks-out.png', '42'));
@@ -48,15 +50,16 @@ class iSpy extends Component {
         store.dispatch(addEvent(2, EventTypes.CAMERA_ON));
         store.dispatch(addEvent(0, EventTypes.CAMERA_OFF));
         store.dispatch(addEvent(0, EventTypes.CAMERA_ON));
-        unsubscribe();
+        store.dispatch(addAlert(0, 'aklsdklasdklasm', EventTypes.CAMERA_OFF));
+        store.dispatch(addAlert(0, 'aklsdklasdklasm', EventTypes.CAMERA_ON));
     }
 
     componentDidMount() {
-
+        this.puppetMaster.startRolling();
     }
 
     componentWillUnmount() {
-
+        this.unsubscribe();
     }
 
     toggle() {

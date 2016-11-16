@@ -18,36 +18,80 @@ import Alert from './Alert';
 
 var window = Dimensions.get('window');
 
+
+
 class CameraAlerts extends Component {
     constructor(props) {
         super(props);
+
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+        var footer = (<View style={styles.buttonContainer}>
+            <TouchableHighlight
+                style={styles.button}
+                onPress={() => this.props.navigator.push(this.buildRoute('AlertAdd', 'Add Alert'))}>
+                <Icon name="plus-circle" size={75} color="orange"/>
+            </TouchableHighlight>
+        </View>);
+
+        var header = (<View style={styles.headerContainer}>
+                            <Text style={styles.text}>Type         </Text>
+                            <Text style={styles.text}>Off/On</Text>
+                            <Text style={styles.text}>Delete</Text>
+                        </View>);
+
+        var filtered = this.props.store.getState().alerts.filter(this.filterAlerts, this);
+        console.log(filtered);
+
+        this.state = {
+            camIndex: this.props.route.passProps.camIndex,
+            alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
+            dataSource: ds.cloneWithRows(filtered),
+        };
+        console.log(this.state);
+        this.unsubscribe = this.props.store.subscribe(()=>{
+            this.setState({
+                alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
+            });
+        });
+    }
+
+    filterAlerts(t){
+        if (t.camIndex!=this.props.route.passProps.camIndex) return false;
+        return true;
     }
 
     componentDidMount() {
         window = Dimensions.get('window');
     }
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
 
+    buildRoute(screenName, name) {
+        let route = {
+            id: screenName,
+            passProps: {
+                camIndex: this.props.route.passProps.camIndex,
+                name: name
+            }
+        };
+        return route;
+    }
+
+    renderRow(rowData) {
+        return (
+            <View>
+                <Alert type={rowData.eventType} enabled={true}/>
+            </View>
+        );
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.text}>Type         </Text>
-                    <Text style={styles.text}>Off/On</Text>
-                    <Text style={styles.text}>Delete</Text>
-                </View>
-                <View style={styles.list}>
-                    <Alert type="Motion Det"/>
-                    <Hr lineColor="grey"/>
-                    <Alert type="Power Fail" />
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={() => this.props.navigator.push({id: 'AlertAdd', passProps: {name: 'Add Alert'}})}>
-                        <Icon name="plus-circle" size={75} color="orange"/>
-                    </TouchableHighlight>
-                </View>
-            </View>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow.bind(this)}
+                />
         );
     }
 }

@@ -23,6 +23,7 @@ class AlertAdd extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props.route.passProps.camIndex)
         this.state = {
             type: '',
             email:''
@@ -33,12 +34,20 @@ class AlertAdd extends Component {
         window = Dimensions.get('window');
     }
 
+    dropdownOnSelect(idx, value) {
+        this.setState({
+            type: value
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.text}>Alert Type</Text>
-                    <ModalDropDown options={alert_types}/>
+                    <ModalDropDown
+                        options={alert_types}
+                        onSelect={(idx, value) => this.dropdownOnSelect(idx, value)}/>
                     <Text style={styles.text}>Email Address</Text>
                     <TextInput
                         style={styles.textInput}
@@ -46,14 +55,15 @@ class AlertAdd extends Component {
                         value={this.state.email}
                     />
                 </View>
+                <Text>{this.props.route.passProps.camIndex}</Text>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
                         onPress={() => {
                             this.props.store.dispatch(addAlert(
+                                this.props.route.passProps.camIndex,
                                 this.state.type,
                                 this.state.email,
-                                this.state.camIndex
                                 )
                             );
                             this.props.navigator.pop();
