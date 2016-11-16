@@ -4,6 +4,7 @@
 
 import { ADD_EVENT, ADD_CAMERA, REMOVE_CAMERA, MODIFY_CAMERA_SETTINGS, ADD_ALERT, REMOVE_ALERT } from './re_actions'
 import Camera from './Camera'
+import Email from './Email'
 
 const initialState = {
     cameras: [],
