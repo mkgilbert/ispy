@@ -9,7 +9,8 @@ export const MODIFY_CAMERA_SETTINGS = 'MODIFY_CAMERA_SETTINGS';
 export const ADD_EVENT = 'ADD_EVENT';
 export const EventTypes = {
     CAMERA_ON: 'CAMERA_ON',
-    CAMERA_OFF: 'CAMERA_OFF'
+    CAMERA_OFF: 'CAMERA_OFF',
+    MOTION_DET: 'MOTION_DET',
 };
 
 export const ADD_ALERT = 'ADD_ALERT';

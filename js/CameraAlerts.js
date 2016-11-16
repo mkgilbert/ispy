@@ -16,7 +16,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Hr from 'react-native-hr';
 import Alert from './Alert';
 import CameraAlertsHeader from './CameraAlertsHeader';
-import CameraAlertsFooter from './CameraAlertsFooter';
 
 var window = Dimensions.get('window');
 
