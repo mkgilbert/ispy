@@ -26,18 +26,15 @@ class CameraAlerts extends Component {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        var filtered = this.props.store.getState().alerts.filter(this.filterAlerts, this);
-        console.log(filtered);
 
         this.state = {
             camIndex: this.props.route.passProps.camIndex,
-            alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
-            dataSource: ds.cloneWithRows(filtered),
+            dataSource: ds.cloneWithRows(this.props.store.getState().alerts.filter(this.filterAlerts, this)),
         };
-        console.log(this.state);
+
         this.unsubscribe = this.props.store.subscribe(()=>{
             this.setState({
-                alerts: this.props.store.getState().alerts.filter(this.filterAlerts, this),
+                dataSource: ds.cloneWithRows(this.props.store.getState().alerts.filter(this.filterAlerts, this))
             });
         });
     }

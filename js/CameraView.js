@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     camera: {
-        width: window.width,
-        height: window.width,
+        width: window.width < window.height ? window.width : window.height,
+        height: window.width < window.height ? window.width : window.height,
         backgroundColor: 'grey',
     },
     buttonContainer: {
