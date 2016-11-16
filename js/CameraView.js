@@ -62,7 +62,8 @@ class CameraView extends Component {
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.push(this.buildRoute('CameraSettings', 'Settings'))}>
+                        onPress={() => this.props.navigator.push(this.buildRoute('CameraSettings', 'Settings'))}
+                        underlayColor="#EF6C00">
                         <View style={styles.buttonView}>
                             <Icon name="gear" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Settings</Text>
@@ -70,7 +71,8 @@ class CameraView extends Component {
                     </TouchableHighlight>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.push(this.buildRoute('CameraAlerts', 'Alerts'))}>
+                        onPress={() => this.props.navigator.push(this.buildRoute('CameraAlerts', 'Alerts'))}
+                        underlayColor="#EF6C00">
                         <View style={styles.buttonView}>
                             <Icon name="bell" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Alerts</Text>
@@ -78,7 +80,8 @@ class CameraView extends Component {
                     </TouchableHighlight>
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => this.props.navigator.push(this.buildRoute('EventView', 'Events'))}>
+                        onPress={() => this.props.navigator.push(this.buildRoute('EventView', 'Events'))}
+                        underlayColor="#EF6C00">
                         <View style={styles.buttonView}>
                             <Icon name="calendar-o" size={40} color="white"/>
                             <Text style={styles.buttonViewContent}>Events</Text>

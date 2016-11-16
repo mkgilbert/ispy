@@ -30,7 +30,8 @@ class Splash extends Component {
                 <Text style={styles.title}>iSpy</Text>
                 <TouchableHighlight
                     style={styles.button}
-                    onPress={() => {this.props.navigator.push({id: "GridView", passProps: {name: "iSpy"}})}}>
+                    onPress={() => {this.props.navigator.push({id: "GridView", passProps: {name: "iSpy"}})}}
+                    underlayColor="#EF6C00">
                     <Text style={styles.buttonContent}>Login</Text>
                 </TouchableHighlight>
             </View>
